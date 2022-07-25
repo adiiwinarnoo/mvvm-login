@@ -1,7 +1,10 @@
 package com.example.loginmvvm.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import com.example.loginmvvm.R
 import com.example.loginmvvm.databinding.ActivityMainBinding
 import com.example.loginmvvm.viewmodel.LoginViewModel
@@ -20,6 +23,16 @@ class MainActivity : AppCompatActivity() {
             var userName = binding.edtUsername.text.toString().trim()
             var password = binding.edtPassword.text.toString().trim()
             loginViewModel.checkingLogin(userName,password)
+        }
+        loginViewModel.loginEvent.observe(this){
+            val status = it.status
+            Log.d("response_login", "onCreate: ${status.toString()}")
+            if (status == 1){
+                val intent = Intent(Intent(this, HomeActivity::class.java))
+                startActivity(intent)
+            }else{
+                Toast.makeText(this, "salaah password", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }

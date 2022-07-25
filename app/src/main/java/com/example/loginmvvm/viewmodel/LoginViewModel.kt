@@ -1,5 +1,6 @@
 package com.example.loginmvvm.viewmodel
 
+import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.example.loginmvvm.model.LoginResponse
 import com.example.loginmvvm.network.ApiRetrofit
 import com.example.loginmvvm.repository.Repo
+import com.example.loginmvvm.view.HomeActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,9 +25,11 @@ class LoginViewModel : ViewModel() {
                 if (response.isSuccessful){
                     if (response.body()?.status == 1){
                         if (response.body()?.dataLogin != null){
-                            Log.d("login-response", "onResponse: Berhasil")
+                            loginEvent.value =response.body()
                         }
                     }
+                }else{
+                    loginEvent.value =LoginResponse(status = 0)
                 }
             }
 
