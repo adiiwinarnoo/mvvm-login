@@ -27,9 +27,9 @@ class LoginViewModel : ViewModel() {
                         if (response.body()?.dataLogin != null){
                             loginEvent.value =response.body()
                         }
+                    }else{
+                        loginEvent.value =LoginResponse(status = 0)
                     }
-                }else{
-                    loginEvent.value =LoginResponse(status = 0)
                 }
             }
 

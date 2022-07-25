@@ -26,7 +26,6 @@ class MainActivity : AppCompatActivity() {
         }
         loginViewModel.loginEvent.observe(this){
             val status = it.status
-            Log.d("response_login", "onCreate: ${status.toString()}")
             if (status == 1){
                 val intent = Intent(Intent(this, HomeActivity::class.java))
                 startActivity(intent)
